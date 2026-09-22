@@ -509,25 +509,25 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{frame}
 
 \begin{frame}{Kiindulási fogyasztói profilok}
-\begin{minipage}[t]{0.36\columnwidth}
+\hspace{-1em}\begin{minipage}{0.27\columnwidth}
 \begin{itemize}\setlength{\itemsep}{1.2ex}
-    \item Magyar okosórás (SM) adatsorok, \highlight{teljes éves} felbontás
-    \item Szűrés: $1\,000$–$8\,000$\,kWh/év éves fogyasztás
-    \item \highlight{„Shift potential"}: az átütemezhető fogyasztás mértéke
-    \item Kiválasztás: \highlight{min}, \highlight{max}, \highlight{mean}\\kombináció (relatív + abszolút)
-    \item Összesen \highlight{6 kiindulási profil}
+    \item Magyar, smart metered, éves
+    \item \highlight{„Shift potential"}: az átütemezhető fogyasztás mennyisége
+    \item \highlight{min}, \highlight{max}, \highlight{átl}
+    \item \highlight{6 kiindulási profil}
 \end{itemize}
 \end{minipage}
-\hfill
-\begin{minipage}[t]{0.60\columnwidth}
+\hspace{0.1em}
+\begin{minipage}{0.72\columnwidth}
 \centering
 \includegraphics[width=\columnwidth]{figures/shift_potential_overview.png}
 \end{minipage}
 \end{frame}
 
 \begin{frame}{Egyidejűségi metrikák}
+\hspace{1em}
 
-\hspace{-1em}\begin{minipage}{0.55\columnwidth}
+\begin{minipage}{0.55\columnwidth}
 \begin{center}
 \scriptsize
 \pgfplotstableread[col sep = comma]{data/profile.csv}\datatable
@@ -582,8 +582,9 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{center}
 \end{minipage}
 \hspace{-2.5em}
+%\vspace{-10ex}
 \begin{minipage}[t]{0.5\columnwidth}
-\vspace{0ex}
+\vspace{-10ex}
 {
 \footnotesize
 \begin{itemize}
