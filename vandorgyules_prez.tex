@@ -500,6 +500,7 @@ Konferencia és Kiállítás
 \end{minipage}
 \hspace{1em}
 \begin{minipage}{0.55\columnwidth}
+
 \includegraphics[width=1.2\linewidth]{figures/appliance_profile.png}
 \end{minipage}
 
@@ -598,7 +599,7 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{frame}
 
 \section{Eredmények}
-\begin{frame}{Jellemzőfontosság-elemzés: módszertan}
+\begin{frame}{A DSM technikák hatásosságának elemzése}
 \vspace{-0.5em}
 \begin{center}
 \scalebox{0.87}{%
@@ -747,6 +748,35 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{minipage}
 \end{frame}
 
+\begin{frame}{Kulcsüzenetek}
+\vspace{0.6em}
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=1cm,
+  card1/.style={rectangle, rounded corners=6pt, fill=mediumblue, draw=mediumblue2,
+                line width=1.2pt, text width=5.2cm, minimum height=5.2cm,
+                align=center, inner sep=14pt, text=white},
+  card2/.style={rectangle, rounded corners=6pt, fill=yellow1, draw=yellow2,
+                line width=1.2pt, text width=5.2cm, minimum height=5.2cm,
+                align=center, inner sep=14pt},
+]
+%% Card 1 – Az akkumulátor dominál
+\node[card1] at (0, 0) {%
+  {\huge\bfseries\color{lightblue1}1}\\[6pt]
+  {\normalsize\bfseries Az akkumulátor\\a meghatározó}\\[10pt]
+  {\small\bfseries\color{lightblue1}SC\,+40\% \enspace|\enspace ${\sim}$170\,000\,Ft/év}\\[8pt]
+  {\scriptsize\color{lightblue1}jellemzőfontosság és\\gazdasági hatás alapján\\egyaránt a legerősebb DSM-elem}%
+};
+%% Card 2 – Kombináció → nettó nulla
+\node[card2] at (6.5, 0) {%
+  {\huge\bfseries\color{yellow2}2}\\[6pt]
+  {\normalsize\bfseries\color{mediumblue2}Kombináció $\rightarrow$\\nettó nulla számla}\\[10pt]
+  {\small\bfseries\color{mediumblue}PV + DSM + Akkumulátor}\\[8pt]
+  {\scriptsize\color{mediumblue2}szaldós villamosenergia-kiadás\\optimális beállítással\\közel nullára csökken}%
+};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
 \section{}
 \begin{frame}[endframe,noframenumbering]{}
 
@@ -754,11 +784,13 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \vspace{1.5ex}
 
 \hspace{-1.5em}\begin{minipage}[b]{0.5\textwidth}
-\begin{itemize}
-    \item DSM több tízezer Ft megtakarítást eredményezhet
-    \item Akkumulátor drága, de kiemelkedő hatású
-    \item DSM + Akkumulátor kombináció: optimális megoldás
-    \item A DSM hálózati szempontból is kedvezőbb
+\begin{itemize}\setlength{\itemsep}{1.2ex}
+    \item Adatvezérelt elemzés: \highlight{akkumulátorméret} és \highlight{PV-tájolás}
+          a leghangosabb jellemzők SC/SS/SP szempontjából
+    \item Az akkumulátor önmagában \highlight{SC\,+40\%}
+          és \highlight{${\sim}$170\,000\,Ft/év} megtakarítást jelent
+    \item PV\,+\,rugalmas DSM\,+\,akkumulátor kombinációval a nettó
+          villamosenergia-kiadás \highlight{közel nullára} csökken
 \end{itemize}
 \end{minipage}
 \hspace{5em}
