@@ -261,21 +261,100 @@ Konferencia és Kiállítás
 }
 
 \section{Bevezetés}
-\begin{frame}{Motiváció és háttér}
-\begin{itemize}
-    \item \gn{Megújulók terjedése}: 2024-re a beépített PV kapacitás $>$ \SI{6000}{MWp}, HMKE $>$ \SI{2300}{MWp}
-    \item A háztartások energiaigénye (pl.~esti csúcs) jellemzően nem esik egybe a napközbeni termeléssel.  
-    \item \gn{KIF hálózati problémák}: feszültségemelkedés, aszimmetria, frekvenciaproblémák, trafó túlterhelődés  
-    \item \gn{Lehetséges megoldások}: 
-    \begin{itemize}
-        \item akkumulátoros energiatárolás,  
-        \item keresletoldali szabályozás -- vezérelt terhelések, HMV, hőszivattyúk
-    \end{itemize}
-\end{itemize}
+\begin{frame}{A "Load Matching" probléma}
+\begin{center}
+\scriptsize
+\pgfplotstableread[col sep = comma]{data/profile.csv}\datatable
+\begin{tikzpicture}[remember picture]
+\begin{axis}[
+    width=0.95\columnwidth,
+	ymin=0,
+	enlarge x limits=-0.01,
+	xmin=2021-07-19 01:00,
+	xmax=2021-07-19 23:00,
+	date coordinates in=x,
+	%xlabel={2021-07-19},
+	ylabel={Energia [$\si{kWh}$]},
+	date ZERO=2021-07-19, 
+	xticklabel=\hour:\minute,
+	height=6cm,
+    width=10cm,
+    xtick pos=left,
+	ytick pos=left,
+	scaled x ticks=false,
+	legend pos=outer north east,
+    legend columns=1
+]
+	    % x-axis baseline
+	\path[name path=axx] (axis cs:2021-07-19 00:00,0) -- (axis cs:2021-07-19 23:45,0);
+
+    % Household consumption (f)
+    \addplot [name path=f, thick, mediumblue2,forget plot] 
+        table [x=Datetime,y=Residential, col sep=comma] {\datatable};
+
+    % PV production (pv)
+    \addplot [name path=pv, thick, yellow2,forget plot] 
+        table [x=Datetime,y=PV_tmy, col sep=comma] {\datatable};
+
+    % Consumption area (blue fill)
+    \addplot[fill=lightblue, fill opacity=0.5] 
+        fill between[of=f and axx];
+
+    % PV area (yellow fill)
+    \addplot[fill=yellow1, fill opacity=0.5] 
+        fill between[of=pv and axx];
+
+    % Shared energy
+    \addplot[fill=lightgreen, fill opacity=0,forget plot] 
+        fill between[of=pv and f];
+    
+    \legend{Háztartás fogyasztása, Napelemtermelés};
+    % put this *before* \end{axis}
+    \addlegendimage{area legend, fill=lightgreen, draw=black};
+    \addlegendentry{Önfogyasztás};
+\end{axis} 
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
-\begin{frame}{Célkitűzés}
+\begin{frame}{Motiváció}
 
+\vspace{2em}
+\begin{minipage}{0.45\textwidth}
+\begin{itemize}
+    \item 2026-re a beépített PV kapacitás $>$ \gn{\SI{8300}{MWp}}, HMKE $>$ \SI{2900}{MWp}
+    \item Esti csúcs $\Leftrightarrow$ napközbeni termelés  
+    \item \gn{KIF hálózati problémák}: feszültségemelkedés, aszimmetria, frekvenciaproblémák, trafó túlterhelődés  
+\end{itemize}
+
+\vspace{1em}
+
+{\tiny $^*$ Forrás: \href{https://mavir.hu/documents/10258/245910190/PV+STATISZTIKA_HU_20230310_ig_v1.pdf/37b8bf5f-9e28-fb98-ee16-6a1d3f5cca58?t=1678787720615}{MAVIR PV csúcsteljesítmények}}
+\end{minipage}
+\hspace{1em}
+\begin{minipage}{0.45\textwidth}
+\hspace{-7ex}
+\pgfplotstableread[col sep = comma]{data/pv.txt}\datatable
+\begin{tikzpicture}
+\begin{axis}
+[
+            ybar,
+            width=1.2\columnwidth,
+            xlabel={Év},
+            xtick=data,
+		    xticklabels from table={\datatable}{Ev},
+		    ylabel style={align=center},
+		    ylabel={Beépített PV\\ csúcsteljesítmény [MW]},
+	        x tick label style={rotate=90,anchor=east}
+]
+\addplot [mediumblue,fill=lightblue]table [x expr=\coordindex, y={PV}] {\datatable};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\end{frame}
+
+
+\begin{frame}{Megoldási javaslatunk, a kutatás célja}
 Cél annak a \highlight{számszerűsítése}, hogy a különböző keresletoldali beavatkozási lehetőségek (\highlight{DSM}) -- akkumulátoros energiatárolók, épületgépészeti rendszerek és háztartási berendezések – hogyan javíthatják a \highlight{fogyasztás--termelés egyidejűségét}.
 
 \vspace{1ex}
@@ -284,6 +363,7 @@ Cél annak a \highlight{számszerűsítése}, hogy a különböző keresletoldal
     \item DSM technológiák modellezése
     \item Ezek különböző kombinációinak előállítása
     \item Összehasonlítás egyidejűségi indikátorok (SSI, SCI) alapján
+    \item Fontosságvizsgálat a legjobb DSM megoldás kiválasztására
 \end{itemize}
 \end{frame}
 
