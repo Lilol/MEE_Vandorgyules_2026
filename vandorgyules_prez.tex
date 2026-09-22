@@ -402,21 +402,104 @@ Konferencia és Kiállítás
 
 
 
-\begin{frame}{A vizsgált DSM technológiák}
-\scriptsize
-\begin{tabularx}{\textwidth}{@{}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X@{}}
-\toprule
-Szcenárió & \begin{tabular}[c]{@{}l@{}}Háztatási berendezések\\ átütemezése\end{tabular} & \begin{tabular}[c]{@{}l@{}}Épületenergetikai\\ rendszer\\ átütemezése\end{tabular} & \begin{tabular}[c]{@{}l@{}}Akkumulátoros\\ energiatároló\end{tabular} \\ \midrule
-Kiindulási profil & \cellcolor[HTML]{E4E102} & \cellcolor[HTML]{E4E102}  & \cellcolor[HTML]{E4E102} \\
-Csak háztartási berendezések & \cellcolor[HTML]{B2DCE2}\ding{51} &  &  \\
-ÉpEn.~rendszer &  & \cellcolor[HTML]{B2DCE2}\ding{51} &  \\
-Berendezések+ÉpEn. & \cellcolor[HTML]{B2DCE2}\ding{51} & \cellcolor[HTML]{B2DCE2}\ding{51} &  \\
-Csak Akkumulátor &  &  & \cellcolor[HTML]{B2DCE2}\ding{51} \\
-Berendezések+Akkumulátor & \cellcolor[HTML]{B2DCE2}\ding{51} &  & \cellcolor[HTML]{B2DCE2}\ding{51} \\
-ÉpEn.+Akkumulátor &  & \cellcolor[HTML]{B2DCE2}\ding{51} & \cellcolor[HTML]{B2DCE2}\ding{51} \\
-Minden DSM & \cellcolor[HTML]{B2DCE2}\ding{51} & \cellcolor[HTML]{B2DCE2}\ding{51} & \cellcolor[HTML]{B2DCE2}\ding{51} \\ \bottomrule
-\end{tabularx}
+\begin{frame}{Szimulációs adathalmaz}
+% Kombinációszám: 6 alapprofil × 12 HVAC (2 típus × 2 DSM × 3 HMV-fogyasztás) × 4 akkumulátorméret × 2 tájolás = 1152
+% Ellenőrizd a Python-kódból!
+\vspace{-0.3em}
+\begin{center}
+\begin{tikzpicture}[
+    x=1cm, y=1cm,
+    mbox/.style={
+        rectangle, rounded corners=3pt,
+        minimum width=2.6cm, minimum height=0.85cm,
+        align=center, text width=2.4cm,
+        draw=mediumblue2, line width=0.7pt,
+        fill=lightblue1, font=\scriptsize\bfseries
+    },
+    topbox/.style={
+        rectangle, rounded corners=4pt,
+        minimum width=3.2cm, minimum height=0.85cm,
+        align=center, text width=3.0cm,
+        draw=mediumblue2, line width=0.9pt,
+        fill=mediumblue, text=white, font=\small\bfseries
+    },
+    pvbox/.style={
+        rectangle, rounded corners=3pt,
+        minimum width=2.6cm, minimum height=0.85cm,
+        align=center, text width=2.4cm,
+        draw=yellow2, line width=0.7pt,
+        fill=yellow1, text=mediumblue2, font=\scriptsize\bfseries
+    },
+    diam/.style={
+        diamond, draw=mediumblue2, fill=white,
+        minimum width=1.0cm, minimum height=0.65cm,
+        line width=0.7pt, inner sep=1pt, aspect=2.2
+    },
+    resbox/.style={
+        rectangle, rounded corners=3pt,
+        minimum width=12.0cm, minimum height=0.8cm,
+        align=center,
+        draw=mediumblue2, line width=0.9pt,
+        fill=mediumblue2, text=white, font=\normalsize\bfseries
+    },
+    arr/.style={->, >=stealth, mediumblue2, line width=0.8pt},
+    lbl/.style={font=\tiny\itshape, mediumblue2}
+]
 
+%% === Alapprofil (top) ===
+\node[topbox] (base) at (0, 4.6) {Alapprofil\\\scriptsize\normalfont (6 profil)};
+
+%% === Elosztó pont a "+" alatt ===
+\coordinate (split) at (0, 3.85);
+\draw[arr] (base.south) -- (split);
+\node[font=\large\bfseries, mediumblue2] at (0.35, 4.2) {$+$};
+
+%% === Technológia-dobozok ===
+% x: -4.35, -1.45, 1.45, 4.7  |  y: 3.0 (PV kicsit magasabb: 3.5)
+\node[mbox] (app)  at (-4.35, 3.0) {Háztartási\\berendezések};
+\node[mbox] (hvac) at (-1.45, 3.0) {Épület-\\gépészet};
+\node[mbox] (batt) at ( 1.45, 3.0) {Akkumulátor};
+\node[pvbox] (pv)  at ( 4.70, 3.55) {PV profil\\DK\,/\,DNy};
+
+%% Elosztó nyilak -> dobozok
+\draw[arr] (split) -- (-4.35, 3.85) -- (app.north);
+\draw[arr] (split) -- (-1.45, 3.85) -- (hvac.north);
+\draw[arr] (split) -- ( 1.45, 3.85) -- (batt.north);
+\draw[arr] (split) -- ( 4.70, 4.10) -- (pv.north);
+
+%% === Döntési rombuszok ===
+\node[diam] (dapp)  at (-4.35, 1.85) {};
+\node[diam] (dhvac) at (-1.45, 1.85) {};
+\node[diam] (dbatt) at ( 1.45, 1.85) {};
+\node[diam] (dpv)   at ( 4.70, 2.40) {};
+
+%% Doboz -> rombusz
+\draw[arr] (app.south)  -- (dapp.north);
+\draw[arr] (hvac.south) -- (dhvac.north);
+\draw[arr] (batt.south) -- (dbatt.north);
+\draw[arr] (pv.south)   -- (dpv.north);
+
+%% Igen / Nem feliratok a rombuszok oldalán
+\node[lbl, anchor=east]  at ([xshift=-3pt]dapp.west)  {igen};
+\node[lbl, anchor=west]  at ([xshift= 3pt]dapp.east)  {nem};
+\node[lbl, anchor=east]  at ([xshift=-3pt]dhvac.west) {igen};
+\node[lbl, anchor=west]  at ([xshift= 3pt]dhvac.east) {nem};
+\node[lbl, anchor=east]  at ([xshift=-3pt]dbatt.west) {igen};
+\node[lbl, anchor=west]  at ([xshift= 3pt]dbatt.east) {nem};
+\node[lbl, anchor=east]  at ([xshift=-3pt]dpv.west)   {igen};
+\node[lbl, anchor=west]  at ([xshift= 3pt]dpv.east)   {nem};
+
+%% === Eredmény-doboz ===
+\node[resbox] (res) at (0, 0.8) {1\,152 szimuláció};
+
+%% Rombusz -> eredmény
+\draw[arr] (dapp.south)  -- (-4.35, 1.25) -- (-5.7, 1.25) -- (-5.7, 0.8) -- (res.west);
+\draw[arr] (dhvac.south) -- (-1.45, 1.25) -- (-1.45, 0.8) -- (res.north);
+\draw[arr] (dbatt.south) -- ( 1.45, 1.25) -- ( 1.45, 0.8) -- (res.north);
+\draw[arr] (dpv.south)   -- ( 4.70, 1.80) -- ( 5.7, 1.80) -- ( 5.7, 0.8) -- (res.east);
+
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}{Kiindulási fogyasztói profilok}
