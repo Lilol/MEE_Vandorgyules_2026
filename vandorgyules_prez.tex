@@ -638,28 +638,29 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 
 %% Box 2: RF model
 \node[rfbox] (rf) at (4.5, 0) {%
-  {\scriptsize\bfseries Véletlen erdő\\regresszió}\\[5pt]
-  {\tiny nemlineáris\\fakegyüttes-modell}
+  {\scriptsize\bfseries Random forest\\regresszió}\\[5pt]
+  {\tiny nemlineáris modell}
 };
 
 %% Box 3: Target variables
 \node[targbox] (targ) at (8.2, 0) {%
   {\scriptsize\bfseries\color{mediumblue2}Célváltozók}\\[8pt]
-  {\normalsize\bfseries\color{mediumblue}SCI}\\[4pt]
-  {\normalsize\bfseries\color{mediumblue}SSI}\\[4pt]
-  {\normalsize\bfseries\color{mediumblue}SP}
+  {\normalsize\bfseries\color{mediumblue}SC}\\[2pt]
+  {\normalsize\bfseries\color{mediumblue}SS}\\[2pt]
+  {\normalsize\bfseries\color{mediumblue}SP}\\[2pt]
+  {\normalsize\bfseries\color{mediumblue}GL}
 };
 
 %% Box 4a: Gini importance
 \node[metbox] (gini) at (12.1, 1.15) {%
-  {\scriptsize\bfseries\color{mediumblue2}Gini (MDI)}\\[3pt]
+  {\scriptsize\bfseries\color{mediumblue2}\textit{Gini} fontosság}\\[3pt]
   {\tiny fa-alapú szórás-\\csökkentés\\[2pt]%
   \textit{gyors, de torzíthat}}
 };
 
 %% Box 4b: Drop-column importance
 \node[metbox] (drop) at (12.1, -1.15) {%
-  {\scriptsize\bfseries\color{mediumblue2}Drop-column}\\[3pt]
+  {\scriptsize\bfseries\color{mediumblue2}\textit{Drop-column} fontosság}\\[3pt]
   {\tiny $R^2$ csökkenése\\[2pt]%
   \textit{torzítatlan,\\számításigényes}}
 };
@@ -700,6 +701,18 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{center}
 \end{frame}
 
+\begin{frame}{Akkumulátor nélkül}
+    
+\end{frame}
+
+
+\begin{frame}{Akkumulátor méretének hatása}
+    
+\end{frame}
+
+\begin{frame}{Akkumulátor kölcsönhatások}
+    
+\end{frame}
 
 \begin{frame}{Éves megtakarítás}
 \vspace{-1ex}
@@ -748,7 +761,7 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{minipage}
 \end{frame}
 
-\begin{frame}{Kulcsüzenetek}
+\begin{frame}{Összefoglalva}
 \vspace{0.6em}
 \begin{center}
 \begin{tikzpicture}[x=1cm, y=1cm,
@@ -764,20 +777,20 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
   {\huge\bfseries\color{lightblue1}1}\\[6pt]
   {\normalsize\bfseries Az akkumulátor\\a meghatározó}\\[10pt]
   {\small\bfseries\color{lightblue1}SC\,+40\% \enspace|\enspace ${\sim}$170\,000\,Ft/év}\\[8pt]
-  {\scriptsize\color{lightblue1}jellemzőfontosság és\\gazdasági hatás alapján\\egyaránt a legerősebb DSM-elem}%
+  {\scriptsize\color{lightblue1}jellemzőfontosság és\\gazdasági hatás alapján\\a leghatásosabb DSM technika}%
 };
 %% Card 2 – Kombináció → nettó nulla
 \node[card2] at (6.5, 0) {%
   {\huge\bfseries\color{yellow2}2}\\[6pt]
-  {\normalsize\bfseries\color{mediumblue2}Kombináció $\rightarrow$\\nettó nulla számla}\\[10pt]
+  {\normalsize\bfseries\color{mediumblue2}Az átütemezhetőség megmarad $\rightarrow$\\az akkumulátor mellett is}\\[10pt]
   {\small\bfseries\color{mediumblue}PV + DSM + Akkumulátor}\\[8pt]
-  {\scriptsize\color{mediumblue2}szaldós villamosenergia-kiadás\\optimális beállítással\\közel nullára csökken}%
+  {\scriptsize\color{mediumblue2}erős kölcsönhatás akkumulátor és eltolási potenciálok között}%
 };
 \end{tikzpicture}
 \end{center}
 \end{frame}
 
-\section{}
+\section{Összegzés}
 \begin{frame}[endframe,noframenumbering]{}
 
 \hspace{-1.5em}{\Large \color{mediumblue2} Összegzés}
