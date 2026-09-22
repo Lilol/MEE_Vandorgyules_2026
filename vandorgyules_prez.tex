@@ -490,7 +490,20 @@ Konferencia és Kiállítás
 \end{frame}
 
 \begin{frame}{Kiindulási fogyasztói profilok}
-\includegraphics[width=0.7\columnwidth]{figures/shift_potential_overview.png}
+\begin{minipage}[t]{0.40\columnwidth}
+\begin{itemize}\setlength{\itemsep}{1.3ex}
+    \item Magyar okosórás (SM) adatsorok, \highlight{teljes éves} felbontás
+    \item Szűrés: $1\,000$–$8\,000$\,kWh/év éves fogyasztás
+    \item \highlight{„Shift potential"}: az átütemezhető fogyasztás mértéke
+    \item Kiválasztás: \highlight{min}, \highlight{max}, \highlight{mean} kombináció\\(relatív és abszolút)
+    \item Összesen \highlight{6 kiindulási profil}
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.55\columnwidth}
+\centering
+\includegraphics[width=\columnwidth]{figures/shift_potential_overview.png}
+\end{minipage}
 \end{frame}
 
 \begin{frame}{Háztartási berendezések átütemezése}
@@ -594,7 +607,7 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 	ytick pos=left,
 	scaled x ticks=false,
 	legend pos=outer north east,
-    legend columns=2
+    legend columns=3
 ]
 	    % x-axis baseline
 	\path[name path=axx] (axis cs:2021-07-19 00:00,0) -- (axis cs:2021-07-19 23:45,0);
@@ -628,8 +641,8 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{center}
 \end{minipage}
 \hspace{-2.5em}
-\begin{minipage}{0.5\columnwidth}
-\vspace{7ex}
+\begin{minipage}[t]{0.5\columnwidth}
+\vspace{0ex}
 {
 \footnotesize
 \begin{itemize}
@@ -643,6 +656,43 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{frame}
 
 \section{Eredmények}
+\begin{frame}{Jellemzőfontosság-elemzés: módszertan}
+\begin{minipage}[t]{0.48\columnwidth}
+\textbf{\color{mediumblue2}Véletlen erdő regresszió}
+\begin{itemize}\setlength{\itemsep}{0.9ex}
+    \item Nemlineáris, fakegyüttes-modell
+    \item Kezeli a jellemzők közötti interakciókat
+    \item Célváltozók: \highlight{SCI}, \highlight{SSI}, \highlight{SP}
+    \item 1\,152 szimuláció $\rightarrow$ tanítóhalmaz
+\end{itemize}
+
+\vspace{1.2ex}
+\textbf{\color{mediumblue2}Bemeneti jellemzők}
+\begin{itemize}\setlength{\itemsep}{0.8ex}
+    \item Alapprofil típusa (6 profil)
+    \item Háztartási berendezések (igen/nem)
+    \item Épületgépészet típusa, HMV-fogyasztás
+    \item Akkumulátorméret [kWh/kWp]
+    \item PV-tájolás (DK\,/\,DNy)
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+\textbf{\color{mediumblue2}Fontossági mértékek}
+\begin{itemize}\setlength{\itemsep}{1ex}
+    \item \highlight{Gini-fontosság (MDI)}: döntési csomópontonkénti szóráscsökkentés súlyozott átlaga --- gyors, de torzíthat magas kardinalitású jellemzőknél
+    \item \highlight{Drop-column fontosság}: modell újratanítása az adott jellemző kihagyásával; az $R^2$ csökkenése méri a fontosságot --- torzítatlan, számításigényes
+\end{itemize}
+
+\vspace{1.2ex}
+\textbf{\color{mediumblue2}Érvényesítés}
+\begin{itemize}\setlength{\itemsep}{0.8ex}
+    \item 5-szörös keresztvalidáció
+    \item Célváltozónként (\highlight{SCI}, \highlight{SSI}, \highlight{SP}) külön modell
+\end{itemize}
+\end{minipage}
+\end{frame}
+
 \begin{frame}{DSM hatása az önfogyasztásra}
 \begin{minipage}[]{0.38\columnwidth}
 \begin{itemize}\setlength{\itemsep}{2ex}
