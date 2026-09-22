@@ -319,32 +319,32 @@ Konferencia és Kiállítás
 
 \begin{frame}{Motiváció}
 
-\vspace{2em}
-\begin{minipage}{0.45\textwidth}
-\begin{itemize}
+\vspace{1.5em}
+\begin{minipage}[t]{0.44\textwidth}
+\begin{itemize}\setlength\itemsep{0.7em}
     \item 2026-re a beépített PV kapacitás $>$ \gn{\SI{8300}{MWp}}, HMKE $>$ \SI{2900}{MWp}
     \item Esti csúcs $\Leftrightarrow$ napközbeni termelés  
     \item \gn{KIF hálózati problémák}: feszültségemelkedés, aszimmetria, frekvenciaproblémák, trafó túlterhelődés  
 \end{itemize}
 
-\vspace{1em}
+\vspace{1.5em}
 
 {\tiny $^*$ Forrás: \href{https://mavir.hu/documents/10258/245910190/PV+STATISZTIKA_HU_20230310_ig_v1.pdf/37b8bf5f-9e28-fb98-ee16-6a1d3f5cca58?t=1678787720615}{MAVIR PV csúcsteljesítmények}}
 \end{minipage}
-\hspace{1em}
-\begin{minipage}{0.45\textwidth}
-\hspace{-7ex}
+\hfill
+\begin{minipage}[t]{0.52\textwidth}
 \pgfplotstableread[col sep = comma]{data/pv.txt}\datatable
 \begin{tikzpicture}
 \begin{axis}
 [
             ybar,
-            width=1.2\columnwidth,
+            width=\columnwidth,
+            height=6cm,
             xlabel={Év},
             xtick=data,
 		    xticklabels from table={\datatable}{Ev},
 		    ylabel style={align=center},
-		    ylabel={Beépített PV\\ csúcsteljesítmény [MW]},
+		    ylabel={Beépített PV csúcsteljesítmény [MW]},
 	        x tick label style={rotate=90,anchor=east}
 ]
 \addplot [mediumblue,fill=lightblue]table [x expr=\coordindex, y={PV}] {\datatable};
