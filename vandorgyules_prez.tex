@@ -512,64 +512,6 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
 \end{spacing}
 \end{frame}
 
-\begin{frame}{Épületgépészeti rendszer modellezése}
-\hspace{-1.5em}\begin{minipage}[]{0.45\columnwidth}
-\small
-\begin{itemize}
-    \item DesignBuilder szimuláció
-    \item \highlight{Air-to-water}: fűtés, hűtés és HMV, \SI{200}{l} puffertárolóval
-    \item \highlight{Air-to-air}: fűtés és hűtés HP, HMV külön villanybojlerrel (\SI{120}{l}).
-    \item \highlight{``SG Ready''}; setpoint módosítás napközben
-    \item Egyszerű, komplex ütemezési szcenáriók
-\end{itemize}
-\end{minipage}
-\hspace{-1em}
-\begin{minipage}[]{0.5\columnwidth}
-\small
-\centering
-\includegraphics[width=1.2\columnwidth]{figures/scheduling.png}
-\end{minipage}
-\end{frame}
-
-\begin{frame}{Használatimelegvíz-profilok}
-\begin{minipage}{0.55\columnwidth}
-    \begin{itemize}\setlength{\itemsep}{1.5ex}
-    \item Smart mért, B-tarifás adatok alapján
-    \item 59, 126, 225 l/nap/háztartás, \SI{40}{°C} csapolási hőmérséklet
-    \item Szcenáriók: \highlight{reggeli} és \highlight{esti} csúcs
-    \item Időbeli eloszlás: DHWcalc ajánlások szerint, napi variációval
-    \item Tárolás: \SI{120}{l} HMV-tároló
-\end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}{0.35\columnwidth}
-\centering
-    \includegraphics[width=\columnwidth]{figures/domestic_hot_water_systems.jpg}
-\end{minipage}
-\end{frame}
-
-\begin{frame}{Akkumulátoros energiatároló modellje}
-\hspace{-1em}\begin{minipage}[]{0.45\columnwidth}
-    \centering
-\includegraphics[width=1.2\columnwidth]{figures/battery.png}
-
-\scriptsize
-\SI{2}{kWh/kWp}, GTDR=\SI{1.5}{kWh/kWh}
-\end{minipage}
-\hspace{3em}
-\begin{minipage}[]{0.45\columnwidth}
-\begin{itemize}\setlength{\itemsep}{1.5ex}
-    \item Méretezés: \{0,0.5,1,2\} kWh/kWp
-    \item Hatásfok: 92\%, SOC: 10–90\%  
-    \item Működés:
-    \begin{itemize}
-        \item PV-felesleg $\rightarrow$ betáplálás,  
-        \item fogyasztás > PV $\rightarrow$ kisütés,  
-        \item alacsony SOC $\rightarrow$ hálózatról tölt
-    \end{itemize}
-\end{itemize}
-\end{minipage}
-\end{frame}
 
 \begin{frame}{Egyidejűségi metrikák}
 
@@ -619,7 +561,7 @@ $^1$ \footnotesize Rollo, Antonino, et al.~"Load Shifting and Demand-Side Manage
     \addplot[fill=lightgreen, fill opacity=0,forget plot] 
         fill between[of=pv and f];
     
-    \legend{Háztartás fogyasztása, Napelemtermelés};
+    \legend{Fogyasztás, Termelés};
     % put this *before* \end{axis}
     \addlegendimage{area legend, fill=lightgreen, draw=black};
     \addlegendentry{Önfogyasztás};
