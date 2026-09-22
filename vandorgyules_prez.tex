@@ -326,13 +326,14 @@ Konferencia és Kiállítás
     \item Esti csúcs $\Leftrightarrow$ napközbeni termelés  
     \item \gn{KIF hálózati problémák}: feszültségemelkedés, aszimmetria, frekvenciaproblémák, trafó túlterhelődés  
 \end{itemize}
-
-\vspace{1.5em}
-
+\hspace{1.5em}
 {\tiny $^*$ Forrás: \href{https://mavir.hu/documents/10258/245910190/PV+STATISZTIKA_HU_20230310_ig_v1.pdf/37b8bf5f-9e28-fb98-ee16-6a1d3f5cca58?t=1678787720615}{MAVIR PV csúcsteljesítmények}}
 \end{minipage}
-\hfill
-\begin{minipage}[t]{0.52\textwidth}
+\hspace{1.5em}
+\begin{minipage}[t]{0.45\textwidth}
+
+\vspace{-3em}
+
 \pgfplotstableread[col sep = comma]{data/pv.txt}\datatable
 \begin{tikzpicture}
 \begin{axis}
@@ -344,7 +345,7 @@ Konferencia és Kiállítás
             xtick=data,
 		    xticklabels from table={\datatable}{Ev},
 		    ylabel style={align=center},
-		    ylabel={Beépített PV csúcsteljesítmény [MW]},
+		    ylabel={Beépített PV\\csúcsteljesítmény [MW]},
 	        x tick label style={rotate=90,anchor=east}
 ]
 \addplot [mediumblue,fill=lightblue]table [x expr=\coordindex, y={PV}] {\datatable};
