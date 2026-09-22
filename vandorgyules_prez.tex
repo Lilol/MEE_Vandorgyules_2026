@@ -354,17 +354,49 @@ Konferencia és Kiállítás
 \end{frame}
 
 
-\begin{frame}{Megoldási javaslatunk, a kutatás célja}
-Cél annak a \highlight{számszerűsítése}, hogy a különböző keresletoldali beavatkozási lehetőségek (\highlight{DSM}) -- akkumulátoros energiatárolók, épületgépészeti rendszerek és háztartási berendezések – hogyan javíthatják a \highlight{fogyasztás--termelés egyidejűségét}.
+\begin{frame}{Megközelítésünk}
 
-\vspace{1ex}
-\highlight{Módszertan}
-\begin{itemize}
-    \item DSM technológiák modellezése
-    \item Ezek különböző kombinációinak előállítása
-    \item Összehasonlítás egyidejűségi indikátorok (SSI, SCI) alapján
-    \item Fontosságvizsgálat a legjobb DSM megoldás kiválasztására
-\end{itemize}
+\vspace{0.4em}
+\begin{center}
+{\small \highlight{Kérdés:} Melyik tényező -- és milyen mértékben -- határozza meg a \highlight{load matching indikátorokat}?}
+\end{center}
+
+\vspace{1.2em}
+
+\begin{center}
+\begin{tikzpicture}[
+    box/.style={
+        rectangle, rounded corners=4pt,
+        minimum width=2.6cm, minimum height=1.25cm,
+        text centered, text width=2.35cm,
+        draw=mediumblue2, line width=0.8pt,
+        fill=lightblue1, font=\small\bfseries, inner sep=4pt
+    },
+    sub/.style={
+        font=\scriptsize, color=mediumblue2, text width=2.5cm,
+        text centered, anchor=north
+    },
+    arr/.style={->, >=stealth, mediumblue2, line width=1.2pt}
+]
+
+\node[box] (A) at (0,0) {Adathalmaz\\ felépítése};
+\node[sub] at (0,-0.82) {6~alapprofil \\ épületgép.~+~akkumulátor};
+
+\node[box] (B) at (3.6,0) {Indikátorok\\ kiszámítása};
+\node[sub] at (3.6,-0.82) {SC,~SS,~SP \\ szimulációnként};
+
+\node[box, fill=mediumblue, text=white, draw=mediumblue2] (C) at (7.2,0) {Random Forest\\ regresszió};
+\node[sub] at (7.2,-0.82) {kereszt-validáció \\ 3~modell};
+
+\node[box, fill=yellow1, draw=yellow2, text=mediumblue2] (D) at (10.8,0) {Jellemző-\\ fontosság};
+\node[sub] at (10.8,-0.82) {Gini~+ Drop-column \\ tároló~méretenként};
+
+\draw[arr] (A) -- (B);
+\draw[arr] (B) -- (C);
+\draw[arr] (C) -- (D);
+
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 
